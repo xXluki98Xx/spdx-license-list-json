@@ -7,8 +7,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  dotnet-test:
+  generate-data:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout Repo
@@ -19,15 +22,6 @@ jobs:
           git clone https://github.com/spdx/license-list-data
           python3 app.py
 
-      - name: Commit licenses
-        continue-on-error: true
-        run: |
-            git config --global user.name 'ci'
-            git config --global user.email 'ci@example.com'
-
-            git pull
-
-            git add ${GITHUB_WORKSPACE}/data.json
-            git commit -m "Automated licenses update"
-
-            git push     
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Automated licenses update
