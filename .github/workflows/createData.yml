@@ -1,0 +1,31 @@
+name: "create license data json"
+
+on:
+  schedule:
+    - cron: "0 12 * * 6"
+
+jobs:
+  dotnet-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Get current spdx repo
+        run: |
+          git clone https://github.com/spdx/license-list-data
+          python3 app.py
+
+      - name: Commit licenses
+        continue-on-error: true
+        run: |
+            git config --global user.name 'ci'
+            git config --global user.email 'ci@example.com'
+
+            git pull
+
+            git add ${GITHUB_WORKSPACE}/data.json
+            git commit -m "Automated licenses update"
+
+            git push     
