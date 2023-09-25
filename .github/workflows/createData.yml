@@ -17,22 +17,12 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: ls path
-        run: |
-          ls -la
-          echo $PWD
-
       - name: Checkout SPDX Repo
         uses: actions/checkout@v3
         with:
           repository: "spdx/license-list-data"
           sparse-checkout: "json/details"
           path: "license-list-data"
-
-      - name: ls path
-        run: |
-          ls -la
-          echo $PWD
   
       - name: Run python
         run: |
