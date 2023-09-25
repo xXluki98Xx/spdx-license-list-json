@@ -17,9 +17,13 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Get current spdx repo
+      - name: Checkout SPDX Repo
+        uses: actions/checkout@v3
+        with:
+          sparse-checkout: "license-list-data/json/details"
+
+      - name: Run python
         run: |
-          git clone https://github.com/spdx/license-list-data
           python3 app.py
 
       - uses: stefanzweifel/git-auto-commit-action@v4
