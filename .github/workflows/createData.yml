@@ -27,6 +27,7 @@ jobs:
         with:
           repository: "spdx/license-list-data"
           sparse-checkout: "json/details"
+          path: "license-list-data"
 
       - name: ls path
         run: |
