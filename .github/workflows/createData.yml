@@ -20,8 +20,10 @@ jobs:
       - name: Checkout SPDX Repo
         uses: actions/checkout@v3
         with:
-          sparse-checkout: "license-list-data/json/details"
-
+          repository: "spdx/license-list-data"
+          sparse-checkout: "json/details"
+          path: "license-list-data"
+  
       - name: Run python
         run: |
           python3 app.py
