@@ -25,7 +25,7 @@ jobs:
       - name: Checkout SPDX Repo
         uses: actions/checkout@v3
         with:
-          repository: "https://github.com/spdx/license-list-data"
+          repository: "spdx/license-list-data"
           sparse-checkout: "json/details"
 
       - name: ls path
